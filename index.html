@@ -1,975 +1,1167 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>YOUSSEF EL AMYN | Digital Card</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cinzel:wght@400;600;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-/* ===== CSS SECTION ===== */
-* { font-family: 'Tajawal', sans-serif; }
-.name-font { font-family: 'Cinzel', serif; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAHARA Clothing | الصفحة الرسمية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --gold-primary: #c9a84c;
+            --gold-light: #f0d78c;
+            --gold-bright: #ffec8b;
+            --gold-dark: #8b6914;
+            --gold-muted: #b8954a;
+            --black-primary: #0a0a0c;
+            --black-secondary: #111114;
+            --black-card: rgba(20, 20, 24, 0.85);
+            --black-glass: rgba(15, 15, 18, 0.7);
+            --text-primary: #f5f5f7;
+            --text-secondary: #a8a8b0;
+            --text-muted: #6e6e78;
+            --border-gold: rgba(201, 168, 76, 0.25);
+            --border-gold-hover: rgba(201, 168, 76, 0.55);
+            --shadow-gold: rgba(201, 168, 76, 0.12);
+            --shadow-gold-strong: rgba(201, 168, 76, 0.25);
+        }
 
-body {
-background: #050508;
-overflow-x: hidden;
-min-height: 100vh;
-}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
-/* Background Slideshow */
-.bg-slideshow {
-position: fixed;
-inset: 0;
-z-index: 0;
-background-size: cover;
-background-position: center;
-animation: bgSlide 20s ease-in-out infinite;
-}
-@keyframes bgSlide {
-0%, 100% { background-image: url('https://images.unsplash.com/photo-1616348436168-de43ad0db179?w=1920&q=80'); }
-25% { background-image: url('https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=1920&q=80'); }
-50% { background-image: url('https://images.unsplash.com/photo-1580910051074-3eb694886505?w=1920&q=80'); }
-75% { background-image: url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1920&q=80'); }
-}
+        body {
+            font-family: 'Cairo', 'Tajawal', sans-serif;
+            background: var(--black-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
 
-.bg-overlay {
-position: fixed;
-inset: 0;
-z-index: 1;
-background: rgba(5,5,8,0.85);
-backdrop-filter: blur(3px);
-}
+        /* ===== BACKGROUND EFFECTS ===== */
+        .bg-aurora {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
 
-/* Orbs */
-.orb {
-position: fixed;
-border-radius: 50%;
-filter: blur(80px);
-opacity: 0.3;
-z-index: 2;
-pointer-events: none;
-}
-.orb-1 {
-width: 300px;
-height: 300px;
-background: #7c3aed;
-top: -100px;
-right: -100px;
-animation: orbFloat1 20s ease-in-out infinite;
-}
-.orb-2 {
-width: 250px;
-height: 250px;
-background: #db2777;
-bottom: -50px;
-left: -50px;
-animation: orbFloat2 25s ease-in-out infinite;
-}
-@keyframes orbFloat1 {
-0%,100%{transform:translate(0,0)}
-33%{transform:translate(-30px,50px)}
-66%{transform:translate(20px,-30px)}
-}
-@keyframes orbFloat2 {
-0%,100%{transform:translate(0,0)}
-33%{transform:translate(40px,-40px)}
-66%{transform:translate(-20px,30px)}
-}
+        .aurora-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.12;
+            animation: aurora-move 20s ease-in-out infinite alternate;
+        }
 
-/* Luxury Card */
-.luxury-card {
-background: rgba(255,255,255,0.02);
-backdrop-filter: blur(60px);
--webkit-backdrop-filter: blur(60px);
-border: 1px solid rgba(255,255,255,0.06);
-box-shadow: 0 0 0 1px rgba(139,92,246,0.1), 0 25px 80px -20px rgba(0,0,0,0.7), 0 0 120px rgba(139,92,246,0.08), inset 0 1px 0 rgba(255,255,255,0.05);
-}
+        .aurora-blob:nth-child(1) {
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, var(--gold-primary), transparent 70%);
+            top: -200px; right: -100px;
+            animation-duration: 25s;
+        }
+        .aurora-blob:nth-child(2) {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, #4a3b12, transparent 70%);
+            bottom: -150px; left: -100px;
+            animation-duration: 30s;
+            animation-delay: -5s;
+        }
+        .aurora-blob:nth-child(3) {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, var(--gold-dark), transparent 70%);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            animation-duration: 22s;
+            animation-delay: -10s;
+        }
 
-/* Header Gradient */
-.luxury-header {
-background: linear-gradient(135deg, #4c1d95, #7c3aed, #db2777, #f43f5e);
-background-size: 400% 400%;
-animation: gradientShift 8s ease infinite;
-position: relative;
-overflow: hidden;
-}
-@keyframes gradientShift {
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
-}
+        @keyframes aurora-move {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+            100% { transform: translate(10px, -10px) scale(1.05); }
+        }
 
-.shimmer-overlay {
-position: absolute;
-inset: 0;
-background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.08) 50%, transparent 60%);
-background-size: 200% 100%;
-animation: shimmerMove 3s ease-in-out infinite;
-}
-@keyframes shimmerMove {
-0%{background-position:200% 0}
-100%{background-position:-200% 0}
-}
+        .gold-dust {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
 
-.diamond-pattern {
-position: absolute;
-inset: 0;
-opacity: 0.15;
-background-image: linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%), linear-gradient(-45deg, rgba(255,255,255,0.1) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.1) 75%), linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.1) 75%);
-background-size: 20px 20px;
-background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-}
+        .dust-particle {
+            position: absolute;
+            width: 2px; height: 2px;
+            background: var(--gold-primary);
+            border-radius: 50%;
+            opacity: 0;
+            animation: dust-float 12s infinite linear;
+            box-shadow: 0 0 6px var(--gold-primary);
+        }
 
-/* Avatar Glow */
-.avatar-glow {
-position: absolute;
-inset: -4px;
-border-radius: 50%;
-background: linear-gradient(135deg, #a78bfa, #f472b6, #fb923c, #a78bfa);
-background-size: 300% 300%;
-animation: glowRotate 4s linear infinite;
-z-index: -1;
-filter: blur(8px);
-}
-.avatar-glow-2 {
-position: absolute;
-inset: -8px;
-border-radius: 50%;
-background: linear-gradient(135deg, #7c3aed, #db2777);
-opacity: 0.3;
-filter: blur(20px);
-animation: glowPulse 3s ease-in-out infinite;
-}
-@keyframes glowRotate {
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
-}
-@keyframes glowPulse {
-0%,100%{opacity:0.2; transform:scale(1)}
-50%{opacity:0.4; transform:scale(1.05)}
-}
+        @keyframes dust-float {
+            0% { opacity: 0; transform: translateY(100vh) rotate(0deg); }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { opacity: 0; transform: translateY(-20vh) rotate(720deg); }
+        }
 
-/* Name Gradient */
-.name-gradient {
-background: linear-gradient(135deg, #e9d5ff, #f9a8d4, #fdba74, #e9d5ff);
-background-size: 300% 300%;
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-background-clip: text;
-animation: nameShine 5s ease infinite;
-}
-@keyframes nameShine {
-0%,100%{background-position:0% 50%}
-50%{background-position:100% 50%}
-}
+        .noise-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0.02;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
 
-/* NFC Ring */
-.nfc-ring {
-position: absolute;
-inset: -4px;
-border-radius: 50%;
-border: 2px solid rgba(16,185,129,0.3);
-animation: ringExpand 2s ease-out infinite;
-}
-@keyframes ringExpand {
-0%{transform:scale(1); opacity:1}
-100%{transform:scale(1.8); opacity:0}
-}
+        /* ===== MAIN WRAPPER ===== */
+        .main-wrapper {
+            position: relative;
+            z-index: 3;
+            max-width: 480px;
+            margin: 0 auto;
+        }
 
-/* Buttons */
-.btn-luxury {
-position: relative;
-overflow: hidden;
-transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.btn-luxury::before {
-content: '';
-position: absolute;
-top: 0;
-left: -100%;
-width: 100%;
-height: 100%;
-background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-transition: left 0.6s;
-}
-.btn-luxury:hover::before {
-left: 100%;
-}
-.btn-luxury:hover {
-transform: translateY(-2px);
-}
-.btn-luxury:active {
-transform: scale(0.97);
-}
+        /* ===== BANNER (Spotify-style) ===== */
+        .banner-section {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+        }
 
-/* Social Icons */
-.social-luxury {
-position: relative;
-transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-overflow: hidden;
-cursor: pointer;
-}
-.social-luxury:hover {
-transform: translateY(-6px) scale(1.08);
-}
-.social-ig:hover {
-box-shadow: 0 15px 35px rgba(219,39,119,0.4);
-}
-.social-fb:hover {
-box-shadow: 0 15px 35px rgba(37,99,235,0.4);
-}
-.social-tk:hover {
-box-shadow: 0 15px 35px rgba(255,255,255,0.2);
-}
-.social-li:hover {
-box-shadow: 0 15px 35px rgba(14,165,233,0.4);
-}
+        .banner-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
 
-/* Info Items */
-.info-luxury {
-transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-position: relative;
-overflow: hidden;
-}
-.info-luxury::before {
-content: '';
-position: absolute;
-top: 0;
-left: 0;
-width: 3px;
-height: 100%;
-background: linear-gradient(180deg, #a78bfa, #f472b6);
-opacity: 0;
-transition: opacity 0.4s;
-}
-.info-luxury:hover {
-background: rgba(255,255,255,0.06);
-transform: translateX(-6px);
-box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-.info-luxury:hover::before {
-opacity: 1;
-}
+        .banner-gradient {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            background: linear-gradient(to bottom, transparent, var(--black-primary));
+            pointer-events: none;
+        }
 
-/* Save Button */
-.save-btn {
-background: linear-gradient(135deg, #7c3aed, #9333ea, #db2777, #f43f5e, #f59e0b);
-background-size: 300% 300%;
-animation: saveGradient 6s ease infinite;
-position: relative;
-overflow: hidden;
-}
-@keyframes saveGradient {
-0%,100%{background-position:0% 50%}
-50%{background-position:100% 50%}
-}
-.save-btn::after {
-content: '';
-position: absolute;
-inset: 0;
-background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-animation: btnShine 3s ease-in-out infinite;
-}
-@keyframes btnShine {
-0%{transform:translateX(-100%)}
-100%{transform:translateX(100%)}
-}
+        /* ===== HERO / PROFILE SECTION ===== */
+        .hero-section {
+            text-align: center;
+            padding: 0 20px 25px;
+            position: relative;
+            margin-top: -55px;
+        }
 
-/* Reveal Animation */
-.reveal {
-opacity: 0;
-transform: translateY(40px);
-animation: revealUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-@keyframes revealUp {
-to { opacity: 1; transform: translateY(0); }
-}
+        .logo-wrapper {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 20px;
+            z-index: 5;
+        }
 
-.float-slow {
-animation: floatSlow 4s ease-in-out infinite;
-}
-@keyframes floatSlow {
-0%,100%{transform:translateY(0)}
-50%{transform:translateY(-8px)}
-}
+        .logo-outer-glow {
+            position: absolute;
+            inset: -20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--shadow-gold-strong) 0%, transparent 65%);
+            animation: glow-pulse 4s ease-in-out infinite;
+        }
 
-.gold-line {
-height: 1px;
-background: linear-gradient(90deg, transparent, rgba(251,191,36,0.3), rgba(251,191,36,0.6), rgba(251,191,36,0.3), transparent);
-}
+        @keyframes glow-pulse {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.9; transform: scale(1.08); }
+        }
 
-.profile-img {
-object-fit: cover;
-width: 100%;
-height: 100%;
-}
+        .logo-ring-outer {
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            background: linear-gradient(var(--black-primary), var(--black-primary)) padding-box,
+                        conic-gradient(from 0deg, var(--gold-dark), var(--gold-primary), var(--gold-bright), var(--gold-primary), var(--gold-dark)) border-box;
+            animation: ring-spin 15s linear infinite;
+        }
 
-/* ===== NAVBAR ===== */
-.navbar-glass {
-background: rgba(5, 5, 8, 0.7);
-backdrop-filter: blur(20px);
--webkit-backdrop-filter: blur(20px);
-border-bottom: 1px solid rgba(255,255,255,0.05);
-}
+        @keyframes ring-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
 
-.menu-overlay {
-position: fixed;
-inset: 0;
-background: rgba(0,0,0,0.9);
-backdrop-filter: blur(10px);
-z-index: 100;
-opacity: 0;
-visibility: hidden;
-transition: all 0.4s ease;
-}
-.menu-overlay.active {
-opacity: 1;
-visibility: visible;
-}
+        .logo-img {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            position: relative;
+            z-index: 2;
+            background: #000;
+            border: 3px solid var(--gold-primary);
+            box-shadow: 0 0 40px rgba(201, 168, 76, 0.25), inset 0 0 20px rgba(201, 168, 76, 0.1);
+        }
 
-.menu-item {
-position: relative;
-overflow: hidden;
-transition: all 0.3s ease;
-}
-.menu-item::after {
-content: '';
-position: absolute;
-bottom: 0;
-right: 0;
-width: 0;
-height: 2px;
-background: linear-gradient(90deg, #a78bfa, #f472b6);
-transition: width 0.3s ease;
-}
-.menu-item:hover::after {
-width: 100%;
-}
+        .brand-name {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            margin-bottom: 4px;
+            position: relative;
+            display: inline-block;
+        }
 
-/* ===== VIDEO SECTION ===== */
-.video-container {
-position: relative;
-border-radius: 1.5rem;
-overflow: hidden;
-border: 1px solid rgba(255,255,255,0.1);
-box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(124,58,237,0.1);
-}
-.video-container video {
-width: 100%;
-display: block;
-}
-.video-overlay {
-position: absolute;
-inset: 0;
-background: linear-gradient(to top, rgba(5,5,8,0.8) 0%, transparent 50%);
-pointer-events: none;
-}
+        .brand-name .text-gold {
+            background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold-primary) 40%, var(--gold-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-/* ===== PRODUCT CARDS ===== */
-.product-card {
-position: relative;
-border-radius: 1.5rem;
-overflow: hidden;
-border: 1px solid rgba(255,255,255,0.08);
-background: rgba(255,255,255,0.03);
-transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-cursor: pointer;
-}
-.product-card:hover {
-transform: translateY(-8px) scale(1.02);
-border-color: rgba(167,139,250,0.3);
-box-shadow: 0 25px 50px rgba(0,0,0,0.5), 0 0 30px rgba(124,58,237,0.2);
-}
-.product-card img {
-width: 100%;
-height: 180px;
-object-fit: cover;
-transition: transform 0.6s ease;
-}
-.product-card:hover img {
-transform: scale(1.1);
-}
-.product-badge {
-position: absolute;
-top: 1rem;
-right: 1rem;
-background: linear-gradient(135deg, #7c3aed, #db2777);
-padding: 0.25rem 0.75rem;
-border-radius: 9999px;
-font-size: 0.75rem;
-font-weight: 700;
-color: white;
-z-index: 10;
-}
+        .brand-name .text-white { color: var(--text-primary); }
 
-/* ===== GALLERY OVERLAY ===== */
-.gallery-overlay {
-position: fixed;
-inset: 0;
-background: rgba(0,0,0,0.95);
-backdrop-filter: blur(20px);
-z-index: 200;
-opacity: 0;
-visibility: hidden;
-transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-overflow-y: auto;
-}
-.gallery-overlay.active {
-opacity: 1;
-visibility: visible;
-}
+        .shimmer-text { position: relative; overflow: hidden; }
+        .shimmer-text::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 236, 139, 0.3), transparent);
+            animation: shimmer 4s infinite;
+        }
 
-.gallery-grid {
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-gap: 1rem;
-padding: 1rem;
-}
-@media (min-width: 768px) {
-.gallery-grid {
-grid-template-columns: repeat(4, 1fr);
-gap: 1.5rem;
-padding: 2rem;
-}
-}
+        @keyframes shimmer {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
 
-.gallery-item {
-position: relative;
-border-radius: 1rem;
-overflow: hidden;
-border: 1px solid rgba(255,255,255,0.1);
-cursor: pointer;
-transition: all 0.4s ease;
-aspect-ratio: 1;
-}
-.gallery-item:hover {
-transform: scale(1.05);
-border-color: rgba(167,139,250,0.5);
-box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(124,58,237,0.3);
-}
-.gallery-item img {
-width: 100%;
-height: 100%;
-object-fit: cover;
-transition: transform 0.6s ease;
-}
-.gallery-item:hover img {
-transform: scale(1.1);
-}
+        .brand-tagline {
+            font-size: 13px;
+            color: var(--gold-muted);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+        }
 
-/* ===== MODALS ===== */
-.modal-overlay {
-position: fixed;
-inset: 0;
-background: rgba(0,0,0,0.95);
-backdrop-filter: blur(15px);
-z-index: 300;
-opacity: 0;
-visibility: hidden;
-transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-overflow-y: auto;
-display: flex;
-align-items: center;
-justify-content: center;
-}
-.modal-overlay.active {
-opacity: 1;
-visibility: visible;
-}
+        .brand-desc {
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            max-width: 340px;
+            margin: 0 auto 18px;
+            line-height: 1.9;
+        }
 
-/* Modal Box */
-.modal-box {
-position: relative;
-background: rgba(10, 10, 15, 0.95);
-border: 1px solid rgba(255,255,255,0.1);
-border-radius: 2rem;
-padding: 2.5rem;
-max-width: 600px;
-width: 90%;
-margin: 2rem auto;
-box-shadow:
-0 0 0 1px rgba(139,92,246,0.2),
-0 25px 80px -20px rgba(0,0,0,0.8),
-0 0 100px rgba(124,58,237,0.15),
-inset 0 1px 0 rgba(255,255,255,0.05);
-overflow: hidden;
-}
+        .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, rgba(201, 168, 76, 0.12), rgba(201, 168, 76, 0.04));
+            border: 1px solid var(--border-gold);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 12px;
+            color: var(--gold-light);
+            font-weight: 700;
+            margin-bottom: 18px;
+            backdrop-filter: blur(10px);
+        }
 
-.modal-box::before {
-content: '';
-position: absolute;
-inset: 0;
-border-radius: 2rem;
-padding: 2px;
-background: linear-gradient(135deg, #7c3aed, #db2777, #f43f5e, #f59e0b, #7c3aed);
-background-size: 300% 300%;
-animation: gradientShift 6s ease infinite;
--webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
--webkit-mask-composite: xor;
-mask-composite: exclude;
-pointer-events: none;
-}
+        .verified-badge i { color: #1da1f2; font-size: 14px; }
 
-.modal-glow {
-position: absolute;
-width: 300px;
-height: 300px;
-border-radius: 50%;
-filter: blur(100px);
-opacity: 0.15;
-pointer-events: none;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-background: linear-gradient(135deg, #7c3aed, #db2777);
-animation: glowPulse 4s ease-in-out infinite;
-}
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            margin-bottom: 18px;
+        }
 
-.modal-close {
-position: absolute;
-top: 1.5rem;
-left: 1.5rem;
-width: 40px;
-height: 40px;
-border-radius: 50%;
-background: rgba(255,255,255,0.05);
-border: 1px solid rgba(255,255,255,0.1);
-display: flex;
-align-items: center;
-justify-content: center;
-cursor: pointer;
-transition: all 0.3s ease;
-z-index: 10;
-color: white;
-}
-.modal-close:hover {
-background: rgba(220,38,38,0.2);
-border-color: rgba(220,38,38,0.4);
-transform: rotate(90deg);
-}
+        .stat-item { text-align: center; position: relative; }
+        .stat-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: -18px; top: 50%;
+            transform: translateY(-50%);
+            width: 1px; height: 30px;
+            background: linear-gradient(to bottom, transparent, var(--border-gold), transparent);
+        }
 
-/* ===== FOOTER ===== */
-.footer-glass {
-background: rgba(5, 5, 8, 0.8);
-backdrop-filter: blur(20px);
-border-top: 1px solid rgba(255,255,255,0.05);
-}
+        .stat-number {
+            font-size: 22px; font-weight: 900;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            line-height: 1.2;
+        }
 
-.footer-link {
-position: relative;
-transition: all 0.3s ease;
-color: rgba(255,255,255,0.5);
-}
-.footer-link:hover {
-color: #a78bfa;
-}
-.footer-link::after {
-content: '';
-position: absolute;
-bottom: -4px;
-right: 0;
-width: 0;
-height: 1px;
-background: linear-gradient(90deg, #a78bfa, #f472b6);
-transition: width 0.3s ease;
-}
-.footer-link:hover::after {
-width: 100%;
-}
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
 
-/* ===== SCROLLBAR ===== */
-::-webkit-scrollbar {
-width: 6px;
-}
-::-webkit-scrollbar-track {
-background: #050508;
-}
-::-webkit-scrollbar-thumb {
-background: linear-gradient(180deg, #7c3aed, #db2777);
-border-radius: 3px;
-}
+        /* ===== SECTION STYLING ===== */
+        .section {
+            margin-bottom: 28px;
+            padding: 0 18px;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: reveal-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
 
-/* ===== ANIMATIONS DELAY ===== */
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
-.delay-400 { animation-delay: 0.4s; }
-.delay-500 { animation-delay: 0.5s; }
-.delay-600 { animation-delay: 0.6s; }
-.delay-700 { animation-delay: 0.7s; }
-.delay-800 { animation-delay: 0.8s; }
-.delay-900 { animation-delay: 0.9s; }
-</style>
+        .section:nth-child(2) { animation-delay: 0.15s; }
+        .section:nth-child(3) { animation-delay: 0.25s; }
+        .section:nth-child(4) { animation-delay: 0.35s; }
+        .section:nth-child(5) { animation-delay: 0.45s; }
+
+        @keyframes reveal-up {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding: 0 4px;
+        }
+
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to left, transparent, var(--border-gold), transparent);
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--gold-primary);
+            letter-spacing: 1px;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title i { font-size: 12px; color: var(--gold-muted); }
+
+        /* ===== GLASSMORPHISM CARDS ===== */
+        .glass-card {
+            background: linear-gradient(145deg, var(--black-card), var(--black-glass));
+            border: 1px solid var(--border-gold);
+            border-radius: 20px;
+            padding: 20px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.06), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .glass-card:hover::before { left: 100%; }
+
+        .glass-card:hover {
+            border-color: var(--border-gold-hover);
+            box-shadow: 0 12px 40px var(--shadow-gold), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            transform: translateY(-3px);
+        }
+
+        /* ===== LOCATION CARD ===== */
+        .location-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .location-icon-wrap {
+            width: 52px; height: 52px;
+            min-width: 52px;
+            background: linear-gradient(135deg, rgba(201, 168, 76, 0.2), rgba(201, 168, 76, 0.05));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: var(--gold-primary);
+            border: 1px solid rgba(201, 168, 76, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .location-card:hover .location-icon-wrap {
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            color: var(--black-primary);
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: 0 8px 20px var(--shadow-gold-strong);
+        }
+
+        .location-info h3 {
+            font-size: 15px;
+            font-weight: 800;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .location-info p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .location-info .highlight {
+            color: var(--gold-muted);
+            font-weight: 700;
+        }
+
+        .location-arrow {
+            margin-right: auto;
+            color: var(--text-muted);
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .location-card:hover .location-arrow {
+            color: var(--gold-primary);
+            transform: translateX(-4px);
+        }
+
+        /* ===== GALLERY ===== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 18px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            cursor: pointer;
+            border: 1px solid var(--border-gold);
+            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 40%, rgba(201, 168, 76, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.04) translateY(-5px);
+            border-color: var(--border-gold-hover);
+            box-shadow: 0 15px 40px var(--shadow-gold-strong);
+            z-index: 2;
+        }
+
+        .gallery-item:hover::after { opacity: 1; }
+
+        .gallery-item img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .gallery-item:hover img { transform: scale(1.15); }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 10, 12, 0.95) 0%, transparent 50%);
+            display: flex;
+            align-items: flex-end;
+            padding: 14px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 3;
+        }
+
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+        .gallery-overlay span {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--gold-light);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        /* ===== LINKS ===== */
+        .links-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .link-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            background: linear-gradient(145deg, var(--black-card), var(--black-glass));
+            border: 1px solid var(--border-gold);
+            border-radius: 18px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(15px);
+        }
+
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.08), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .link-card:hover::before { left: 100%; }
+
+        .link-card:hover {
+            border-color: var(--gold-primary);
+            transform: translateX(-5px);
+            box-shadow: 0 10px 30px var(--shadow-gold), 0 0 0 1px rgba(201, 168, 76, 0.2);
+        }
+
+        .link-icon {
+            width: 46px; height: 46px;
+            min-width: 46px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .link-card:hover .link-icon {
+            transform: scale(1.15) rotate(-8deg);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .link-icon.website {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+        .link-icon.instagram {
+            background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            box-shadow: 0 4px 15px rgba(220, 39, 67, 0.3);
+        }
+        .link-icon.tiktok {
+            background: linear-gradient(135deg, #00f2fe, #4facfe, #000000);
+            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
+        }
+        .link-icon.whatsapp {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+        .link-icon.phone {
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            box-shadow: 0 4px 15px var(--shadow-gold-strong);
+        }
+        .link-icon.location {
+            background: linear-gradient(135deg, #ea4335, #fbbc05);
+            box-shadow: 0 4px 15px rgba(234, 67, 53, 0.3);
+        }
+
+        .link-content { flex: 1; position: relative; z-index: 2; }
+
+        .link-content h4 {
+            font-size: 15px;
+            font-weight: 800;
+            margin-bottom: 3px;
+            transition: color 0.3s ease;
+        }
+
+        .link-card:hover .link-content h4 { color: var(--gold-light); }
+
+        .link-content p {
+            font-size: 12px;
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+
+        .link-card:hover .link-content p { color: var(--text-secondary); }
+
+        .link-arrow {
+            color: var(--text-muted);
+            font-size: 13px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .link-card:hover .link-arrow {
+            color: var(--gold-primary);
+            transform: translateX(-5px);
+        }
+
+        /* ===== HOURS ===== */
+        .hours-card { padding: 22px; }
+
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .hours-row:last-child {
+            border-bottom: none;
+            padding-top: 14px;
+            margin-top: 4px;
+        }
+
+        .hours-day {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hours-day i { font-size: 11px; color: var(--gold-muted); }
+
+        .hours-time {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--gold-primary);
+            font-family: 'Tajawal', monospace;
+        }
+
+        .hours-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+
+        .hours-status.open {
+            background: rgba(34, 197, 94, 0.1);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .hours-status.closed {
+            background: rgba(239, 68, 68, 0.1);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .status-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            animation: pulse-dot 2s infinite;
+        }
+
+        .hours-status.open .status-dot { background: #4ade80; box-shadow: 0 0 8px #4ade80; }
+        .hours-status.closed .status-dot { background: #f87171; box-shadow: 0 0 8px #f87171; }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 35px 18px 45px;
+            border-top: 1px solid rgba(201, 168, 76, 0.08);
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .footer-logo {
+            width: 70px; height: 70px;
+            margin: 0 auto 16px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--border-gold);
+            box-shadow: 0 0 30px var(--shadow-gold);
+        }
+
+        .footer-logo img { width: 100%; height: 100%; object-fit: cover; }
+
+        .footer-brand {
+            font-size: 18px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+        }
+
+        .footer-brand .gold {
+            background: linear-gradient(135deg, var(--gold-bright), var(--gold-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .social-icon {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, var(--black-card), var(--black-secondary));
+            border: 1px solid var(--border-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-muted);
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 50%;
+        }
+
+        .social-icon:hover::before { opacity: 1; }
+
+        .social-icon:hover {
+            border-color: var(--gold-primary);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 25px var(--shadow-gold-strong);
+            color: var(--black-primary);
+        }
+
+        .social-icon i {
+            position: relative;
+            z-index: 2;
+            transition: color 0.3s ease;
+        }
+
+        .social-icon:hover i { color: var(--black-primary); }
+
+        .copyright {
+            font-size: 11px;
+            color: var(--text-muted);
+            opacity: 0.6;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--black-primary); }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--gold-dark), var(--gold-primary));
+            border-radius: 3px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 400px) {
+            .banner-section { height: 240px; }
+            .brand-name { font-size: 24px; }
+            .logo-wrapper { width: 110px; height: 110px; }
+            .gallery-grid { gap: 8px; }
+            .link-card { padding: 14px 16px; }
+            .stats-bar { gap: 25px; }
+        }
+
+        /* ===== PAGE LOADER ===== */
+        .page-loader {
+            position: fixed;
+            inset: 0;
+            background: var(--black-primary);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 24px;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-logo {
+            width: 100px; height: 100px;
+            border-radius: 50%;
+            border: 2px solid var(--border-gold);
+            padding: 4px;
+            animation: loader-pulse 2s ease-in-out infinite;
+        }
+
+        .loader-logo img {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        @keyframes loader-pulse {
+            0%, 100% { box-shadow: 0 0 20px var(--shadow-gold); transform: scale(1); }
+            50% { box-shadow: 0 0 40px var(--shadow-gold-strong); transform: scale(1.05); }
+        }
+
+        .loader-bar {
+            width: 120px; height: 2px;
+            background: rgba(201, 168, 76, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .loader-bar-fill {
+            height: 100%; width: 0%;
+            background: linear-gradient(90deg, var(--gold-dark), var(--gold-primary), var(--gold-light));
+            border-radius: 2px;
+            animation: loader-fill 1.5s ease-in-out forwards;
+        }
+
+        @keyframes loader-fill {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        .loader-text {
+            font-size: 12px;
+            color: var(--gold-muted);
+            font-weight: 700;
+            letter-spacing: 3px;
+        }
+    </style>
 </head>
-<body class="flex flex-col items-center justify-center p-3 relative min-h-screen">
+<body>
+    <!-- Page Loader -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-logo">
+            <img src="21086.png" alt="SAHARA Clothing">
+        </div>
+        <div class="loader-bar">
+            <div class="loader-bar-fill"></div>
+        </div>
+        <div class="loader-text">SAHARA CLOTHING</div>
+    </div>
 
-<!-- Background Elements -->
-<div class="bg-slideshow"></div>
-<div class="bg-overlay"></div>
-<div class="orb orb-1"></div>
-<div class="orb orb-2"></div>
+    <!-- Background Effects -->
+    <div class="bg-aurora">
+        <div class="aurora-blob"></div>
+        <div class="aurora-blob"></div>
+        <div class="aurora-blob"></div>
+    </div>
+    <div class="gold-dust" id="goldDust"></div>
+    <div class="noise-overlay"></div>
 
-<!-- ===== NAVBAR ===== -->
-<nav class="navbar-glass fixed top-0 left-0 right-0 z-50 px-4 py-3">
-<div class="max-w-sm mx-auto flex items-center justify-between">
-<div class="flex items-center gap-2">
-<div class="w-8 h-8 rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center">
-<span class="text-white text-xs font-bold name-font">YA</span>
-</div>
-<span class="text-white/80 text-sm font-bold name-font tracking-wider">YOUSSEF EL AMYN</span>
-</div>
-<button onclick="toggleMenu()" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-all active:scale-95">
-<svg class="w-5 h-5 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-</svg>
-</button>
-</div>
-</nav>
+    <!-- Main Content -->
+    <div class="main-wrapper">
 
-<!-- Menu Overlay -->
-<div id="menuOverlay" class="menu-overlay flex items-center justify-center">
-<div class="text-center">
-<button onclick="toggleMenu()" class="absolute top-6 left-6 w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-red-500/20 hover:border-red-500/30 transition-all">
-<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-</svg>
-</button>
-<div class="space-y-6">
-<button onclick="openModal('about'); toggleMenu();" class="menu-item block text-2xl font-bold text-white/90 hover:text-white px-8 py-3">من نحن</button>
-<button onclick="openModal('terms'); toggleMenu();" class="menu-item block text-2xl font-bold text-white/90 hover:text-white px-8 py-3">شروط الاستخدام</button>
-<button onclick="openModal('contact'); toggleMenu();" class="menu-item block text-2xl font-bold text-white/90 hover:text-white px-8 py-3">اتصل بنا</button>
-</div>
-<div class="mt-12 flex justify-center gap-4">
-<div class="w-2 h-2 rounded-full bg-violet-500 animate-pulse"></div>
-<div class="w-2 h-2 rounded-full bg-fuchsia-500 animate-pulse delay-100"></div>
-<div class="w-2 h-2 rounded-full bg-rose-500 animate-pulse delay-200"></div>
-</div>
-</div>
-</div>
+        <!-- Banner Section (Spotify-style top banner) -->
+        <div class="banner-section">
+            <img src="Azz12.png" alt="SAHARA Clothing Banner" class="banner-img">
+            <div class="banner-gradient"></div>
+        </div>
 
-<!-- ===== MAIN CARD ===== -->
-<div class="relative z-10 w-full max-w-sm reveal mt-20 mb-8">
-<div class="luxury-card rounded-[2.5rem] overflow-hidden">
+        <!-- Hero Section (Logo + Info) -->
+        <section class="hero-section">
+            <div class="logo-wrapper">
+                <div class="logo-outer-glow"></div>
+                <div class="logo-ring-outer"></div>
+                <img src="21086.png" alt="SAHARA Clothing Logo" class="logo-img">
+            </div>
 
-<!-- Header -->
-<div class="luxury-header h-40 relative">
-<div class="shimmer-overlay"></div>
-<div class="diamond-pattern"></div>
-<div class="absolute top-6 right-8 w-3 h-3 rounded-full bg-white/20 float-slow"></div>
-<div class="absolute top-10 left-12 w-2 h-2 rounded-full bg-white/15 float-slow" style="animation-delay:0.5s"></div>
-<div class="absolute bottom-0 left-0 w-full overflow-hidden" style="line-height:0;">
-<svg viewBox="0 0 1200 120" preserveAspectRatio="none" style="position:relative;display:block;width:calc(100% + 1.3px);height:70px;">
-<path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="rgba(255,255,255,0.04)"></path>
-</svg>
-</div>
-</div>
+            <div class="verified-badge">
+                <i class="fas fa-check-circle"></i>
+                حساب موثّق رسمياً
+            </div>
 
-<div class="px-6 pb-8 -mt-14 relative">
+            <h1 class="brand-name shimmer-text">
+                <span class="text-gold">SAHARA</span>
+                <span class="text-white"> CLOTHING</span>
+            </h1>
+            <p class="brand-tagline">Mode Homme | Qualité • Style • Confiance</p>
+            <p class="brand-desc">
+                المحل المتخصص في أزياء الرجال والموضة العصرية. نقدم لك أجود المنتجات بأسعار تنافسية في قلب إنزكان.
+            </p>
 
-<!-- Avatar -->
-<div class="flex justify-center mb-5 reveal delay-100">
-<div class="relative">
-<div class="avatar-glow-2"></div>
-<div class="avatar-glow"></div>
-<div class="w-28 h-28 rounded-full flex items-center justify-center relative z-10 overflow-hidden" style="background: linear-gradient(135deg, #1e1b4b, #0f172a); border: 3px solid rgba(255,255,255,0.1);">
-<img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face" alt="YOUSSEF EL AMYN" class="profile-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-<span class="text-4xl font-black name-font name-gradient hidden" style="display:none;">YA</span>
-</div>
-<div class="absolute -bottom-1 -right-1 w-8 h-8 rounded-full flex items-center justify-center z-20" style="background: linear-gradient(135deg, #10b981, #059669); border: 2px solid #050508;">
-<div class="nfc-ring"></div>
-<svg class="w-4 h-4 text-white relative z-10" style="transform:rotate(-45deg);" fill="currentColor" viewBox="0 0 24 24">
-<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-</svg>
-</div>
-</div>
-</div>
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-number">46.5K</span>
+                    <span class="stat-label">متابع</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">702</span>
+                    <span class="stat-label">منشور</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">2</span>
+                    <span class="stat-label">متابعة</span>
+                </div>
+            </div>
+        </section>
 
-<!-- Name -->
-<div class="text-center mb-6 reveal delay-200">
-<h1 class="text-[1.6rem] font-black name-font name-gradient tracking-wider mb-2">YOUSSEF EL AMYN</h1>
-<div class="gold-line w-24 mx-auto mb-3"></div>
-<p class="text-fuchsia-200/80 text-sm font-medium tracking-wide">Entrepreneur & Digital Creator</p>
-<p class="text-white/30 text-xs mt-1">Morocco</p>
-</div>
+        <!-- Location Section -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-line"></div>
+                <h2 class="section-title"><i class="fas fa-map-marker-alt"></i> موقع المتجر</h2>
+                <div class="section-line"></div>
+            </div>
+            <a href="https://maps.google.com/?q=Inezgane+Sahara+Mall" target="_blank" class="glass-card location-card">
+                <div class="location-icon-wrap">
+                    <i class="fas fa-store"></i>
+                </div>
+                <div class="location-info">
+                    <h3>Inezgane Sahara Mall</h3>
+                    <p>الطابق الأول - المحل رقم ...<br>
+                    <span class="highlight">إنزكان، المغرب 🇲🇦</span></p>
+                </div>
+                <i class="fas fa-arrow-left location-arrow"></i>
+            </a>
+        </section>
 
-<!-- NFC Badge -->
-<div class="flex justify-center mb-6 reveal delay-300">
-<div class="inline-flex items-center gap-2.5 rounded-full px-5 py-2" style="background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(5,150,105,0.1)); border: 1px solid rgba(16,185,129,0.2);">
-<span class="relative flex h-2.5 w-2.5">
-<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
-</span>
-<span class="text-emerald-300 text-xs font-bold tracking-wide">NFC CONNECTED</span>
-</div>
-</div>
+        <!-- Gallery Section -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-line"></div>
+                <h2 class="section-title"><i class="fas fa-images"></i> معرض المنتجات</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="Azz1.png" alt="Jeans Flared">
+                    <div class="gallery-overlay">
+                        <span>👖 جينز فلير</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="Azz2.png" alt="Outfit Collection">
+                    <div class="gallery-overlay">
+                        <span>👕 تشكيلة عصرية</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="Azz3.png" alt="Store View">
+                    <div class="gallery-overlay">
+                        <span>🏪 واجهة المتجر</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="Azz4.png" alt="Brand Logo">
+                    <div class="gallery-overlay">
+                        <span>✨ هوية العلامة</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<!-- Action Buttons -->
-<div class="grid grid-cols-2 gap-3 mb-6 reveal delay-400">
-<a href="tel:0638571166" class="btn-luxury flex items-center justify-center gap-2.5 text-white rounded-2xl py-4 shadow-lg" style="background: linear-gradient(135deg, #7c3aed, #9333ea); box-shadow: 0 10px 40px rgba(124,58,237,0.35);">
-<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-<path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-</svg>
-<span class="text-sm font-bold">اتصال</span>
-</a>
-<button onclick="openWhatsApp()" class="btn-luxury flex items-center justify-center gap-2.5 text-white rounded-2xl py-4 shadow-lg w-full" style="background: linear-gradient(135deg, #059669, #0d9488); box-shadow: 0 10px 40px rgba(5,150,105,0.35);">
-<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-</svg>
-<span class="text-sm font-bold">واتساب</span>
-</button>
-</div>
+        <!-- Links Section -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-line"></div>
+                <h2 class="section-title"><i class="fas fa-link"></i> روابط التواصل</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="links-grid">
+                <a href="https://saharaclothing.shop" target="_blank" class="link-card">
+                    <div class="link-icon website">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="link-content">
+                        <h4>الموقع الإلكتروني</h4>
+                        <p>saharaclothing.shop</p>
+                    </div>
+                    <i class="fas fa-arrow-left link-arrow"></i>
+                </a>
 
-<!-- Contact Info -->
-<div class="space-y-2.5 mb-6 reveal delay-500">
-<a href="tel:0638571166" class="info-luxury flex items-center gap-4 rounded-2xl p-4" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05);">
-<div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(167,139,250,0.1));">
-<svg class="w-5 h-5 text-violet-300" fill="currentColor" viewBox="0 0 24 24">
-<path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/>
-</svg>
-</div>
-<div class="text-right flex-1">
-<p class="text-white text-sm font-bold">رقم الهاتف</p>
-<p class="text-white/40 text-xs font-mono tracking-wider">06 38 57 11 66</p>
-</div>
-<svg class="w-4 h-4 text-white/20" fill="currentColor" viewBox="0 0 24 24">
-<path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
-</svg>
-</a>
+                <a href="https://instagram.com/sahara_clothing01" target="_blank" class="link-card">
+                    <div class="link-icon instagram">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <div class="link-content">
+                        <h4>إنستغرام</h4>
+                        <p>@sahara_clothing01</p>
+                    </div>
+                    <i class="fas fa-arrow-left link-arrow"></i>
+                </a>
 
-<button onclick="openWhatsApp()" class="info-luxury flex items-center gap-4 rounded-2xl p-4 w-full text-right" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05);">
-<div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, rgba(16,185,129,0.2), rgba(5,150,105,0.1));">
-<svg class="w-5 h-5 text-emerald-300" fill="currentColor" viewBox="0 0 24 24">
-<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-</svg>
-</div>
-<div class="text-right flex-1">
-<p class="text-white text-sm font-bold">واتساب</p>
-<p class="text-white/40 text-xs font-mono tracking-wider">07 76 36 68 28</p>
-</div>
-<svg class="w-4 h-4 text-white/20" fill="currentColor" viewBox="0 0 24 24">
-<path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
-</svg>
-</button>
-</div>
+                <a href="https://www.tiktok.com/@sahara_clothing01?_r=1&_t=ZS-996hpkz243A" target="_blank" class="link-card">
+                    <div class="link-icon tiktok">
+                        <i class="fab fa-tiktok"></i>
+                    </div>
+                    <div class="link-content">
+                        <h4>تيك توك</h4>
+                        <p>@sahara_clothing01</p>
+                    </div>
+                    <i class="fas fa-arrow-left link-arrow"></i>
+                </a>
 
-<!-- Social Media -->
-<div class="mb-6 reveal delay-600">
-<div class="flex items-center gap-3 mb-4">
-<div class="h-px flex-1" style="background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1));"></div>
-<p class="text-white/25 text-[10px] font-bold uppercase tracking-[0.3em]">تابعني</p>
-<div class="h-px flex-1" style="background: linear-gradient(90deg, rgba(255,255,255,0.1), transparent);"></div>
-</div>
+                <a href="https://wa.me/212691276611" target="_blank" class="link-card">
+                    <div class="link-icon whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="link-content">
+                        <h4>واتساب</h4>
+                        <p>0691276611</p>
+                    </div>
+                    <i class="fas fa-arrow-left link-arrow"></i>
+                </a>
 
-<div class="flex justify-center gap-3">
-<button onclick="openInstagram()" class="social-luxury social-ig w-14 h-14 rounded-2xl flex items-center justify-center" style="background: linear-gradient(135deg, rgba(147,51,234,0.15), rgba(219,39,119,0.15)); border: 1px solid rgba(255,255,255,0.08);">
-<svg class="w-6 h-6 text-white/80" fill="currentColor" viewBox="0 0 24 24">
-<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-</svg>
-</button>
-<button onclick="openFacebook()" class="social-luxury social-fb w-14 h-14 rounded-2xl flex items-center justify-center" style="background: linear-gradient(135deg, rgba(37,99,235,0.15), rgba(30,64,175,0.15)); border: 1px solid rgba(255,255,255,0.08);">
-<svg class="w-6 h-6 text-white/80" fill="currentColor" viewBox="0 0 24 24">
-<path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-</svg>
-</button>
-<button onclick="openTikTok()" class="social-luxury social-tk w-14 h-14 rounded-2xl flex items-center justify-center" style="background: linear-gradient(135deg, rgba(75,85,99,0.15), rgba(0,0,0,0.2)); border: 1px solid rgba(255,255,255,0.08);">
-<svg class="w-6 h-6 text-white/80" fill="currentColor" viewBox="0 0 24 24">
-<path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
-</svg>
-</button>
-<button onclick="openLinkedIn()" class="social-luxury social-li w-14 h-14 rounded-2xl flex items-center justify-center" style="background: linear-gradient(135deg, rgba(29,78,216,0.15), rgba(14,165,233,0.15)); border: 1px solid rgba(255,255,255,0.08);">
-<svg class="w-6 h-6 text-white/80" fill="currentColor" viewBox="0 0 24 24">
-<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-</svg>
-</button>
-</div>
-</div>
+                <a href="tel:0691276611" class="link-card">
+                    <div class="link-icon phone">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="link-content">
+                        <h4>اتصال مباشر</h4>
+                        <p>0691276611</p>
+                    </div>
+                    <i class="fas fa-arrow-left link-arrow"></i>
+                </a>
 
-<!-- ===== VIDEO & MEDIA SECTION ===== -->
-<div class="mb-6 reveal delay-700">
-<div class="flex items-center gap-3 mb-4">
-<div class="h-px flex-1" style="background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1));"></div>
-<p class="text-white/25 text-[10px] font-bold uppercase tracking-[0.3em]">معرضنا</p>
-<div class="h-px flex-1" style="background: linear-gradient(90deg, rgba(255,255,255,0.1), transparent);"></div>
-</div>
+                <a href="https://wa.me/212600000000" target="_blank" class="link-card">
+                    <div class="link-icon whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="link-content">
+                        <h4>واتساب (الرقم الثاني)</h4>
+                        <p>تواصل معنا مباشرة</p>
+                    </div>
+                    <i class="fas fa-arrow-left link-arrow"></i>
+                </a>
 
-<!-- Video -->
-<div class="video-container mb-4 reveal delay-700">
-<video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&q=80">
-<source src="https://assets.mixkit.co/videos/preview/mixkit-hands-of-a-man-typing-on-a-smart-phone-34535-large.mp4" type="video/mp4">
-</video>
-<div class="video-overlay"></div>
-<div class="absolute bottom-4 right-4 flex items-center gap-2">
-<div class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
-<span class="text-white/60 text-xs">مباشر</span>
-</div>
-</div>
+                <a href="https://maps.google.com/?q=Inezgane+Sahara+Mall" target="_blank" class="link-card">
+                    <div class="link-icon location">
+                        <i class="fas fa-location-arrow"></i>
+                    </div>
+                    <div class="link-content">
+                        <h4>موقع المحل على الخريطة</h4>
+                        <p>Google Maps - Inezgane</p>
+                    </div>
+                    <i class="fas fa-arrow-left link-arrow"></i>
+                </a>
+            </div>
+        </section>
 
-<!-- Product Cards -->
-<div class="grid grid-cols-2 gap-3 mb-4 reveal delay-800">
-<div class="product-card group">
-<div class="product-badge">جديد</div>
-<img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=400&h=300&fit=crop" alt="iPhone 15 Pro Max">
-<div class="p-3">
-<h3 class="text-white text-sm font-bold mb-1">iPhone 15 Pro Max</h3>
-<p class="text-white/40 text-xs">أحدث إصدارات آبل مع معالج A17</p>
-<div class="mt-2 flex items-center justify-between">
-<span class="text-violet-300 text-xs font-bold">12,500 درهم</span>
-<span class="text-white/20 text-[10px]">المتجر</span>
-</div>
-</div>
-</div>
-<div class="product-card group">
-<div class="product-badge" style="background: linear-gradient(135deg, #f59e0b, #f43f5e);">عرض</div>
-<img src="https://images.unsplash.com/photo-1616348436168-de43ad0db179?w=400&h=300&fit=crop" alt="Samsung S24 Ultra">
-<div class="p-3">
-<h3 class="text-white text-sm font-bold mb-1">Samsung S24 Ultra</h3>
-<p class="text-white/40 text-xs">ذكاء اصطناعي متقدم وقلم S-Pen</p>
-<div class="mt-2 flex items-center justify-between">
-<span class="text-violet-300 text-xs font-bold">11,900 درهم</span>
-<span class="text-white/20 text-[10px]">المتجر</span>
-</div>
-</div>
-</div>
-</div>
+        <!-- Working Hours -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-line"></div>
+                <h2 class="section-title"><i class="fas fa-clock"></i> أوقات العمل</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="glass-card hours-card">
+                <div class="hours-row">
+                    <span class="hours-day"><i class="far fa-calendar"></i> طوال الأسبوع</span>
+                    <span class="hours-time">10:00 ص ⟷ 10:00 م</span>
+                </div>
+                <div class="hours-row">
+                    <span class="hours-day"><i class="fas fa-door-open"></i> حالة المتجر</span>
+                    <span class="hours-status open">
+                        <span class="status-dot"></span>
+                        مفتوح طوال الأسبوع
+                    </span>
+                </div>
+            </div>
+        </section>
 
-<!-- View All Button -->
-<button onclick="openGallery()" class="btn-luxury w-full flex items-center justify-center gap-2 text-white rounded-2xl py-4 shadow-lg" style="background: linear-gradient(135deg, #1e1b4b, #312e81); border: 1px solid rgba(139,92,246,0.3); box-shadow: 0 10px 40px rgba(30,27,75,0.4);">
-<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-</svg>
-<span class="text-sm font-bold">عرض كل الصور</span>
-</button>
-</div>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-logo">
+                <img src="21086.png" alt="SAHARA Clothing">
+            </div>
+            <div class="footer-brand">
+                <span class="gold">SAHARA</span> CLOTHING
+            </div>
+            <p class="footer-text">أزياء رجالية بأناقة لا تُضاهى</p>
+            <div class="social-icons">
+                <a href="https://instagram.com/sahara_clothing01" target="_blank" class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.tiktok.com/@sahara_clothing01?_r=1&_t=ZS-996hpkz243A" target="_blank" class="social-icon">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="https://wa.me/212691276611" target="_blank" class="social-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="tel:0691276611" class="social-icon">
+                    <i class="fas fa-phone"></i>
+                </a>
+                <a href="https://saharaclothing.shop" target="_blank" class="social-icon">
+                    <i class="fas fa-globe"></i>
+                </a>
+            </div>
+            <p class="copyright">جميع الحقوق محفوظة © SAHARA Clothing 2026</p>
+        </footer>
 
-<!-- Save Contact -->
-<div class="mb-4 reveal delay-900">
-<a href="data:text/vcard;charset=utf-8,BEGIN:VCARD%0AVERSION:3.0%0AFN:YOUSSEF%20EL%20AMYN%0ATEL;TYPE=CELL:0638571166%0ATEL;TYPE=WHATSAPP:0776366828%0AURL:https://www.instagram.com/p/DMWVDuII75e/%0AURL:https://www.facebook.com/share/1FPWkXY6BF/%0AURL:https://www.tiktok.com/@youssef_amin22%0AURL:https://www.linkedin.com/in/youssef-amin-54796941b%0AEND:VCARD" download="YOUSSEF_EL_AMYN.vcf" class="save-btn block w-full text-white font-bold rounded-2xl py-5 shadow-2xl transition-all active:scale-95 flex items-center justify-center gap-3">
-<svg class="w-6 h-6 relative z-10" fill="currentColor" viewBox="0 0 24 24">
-<path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-</svg>
-<span class="relative z-10 text-base">حفظ جهة الاتصال</span>
-</a>
-</div>
+    </div>
 
-<!-- Footer Badge -->
-<div class="mt-5 text-center reveal delay-900">
-<div class="flex items-center justify-center gap-3 mb-2">
-<div class="h-px w-10" style="background: linear-gradient(90deg, transparent, rgba(251,191,36,0.2));"></div>
-<svg class="w-4 h-4 text-white/15" style="transform:rotate(-45deg);" fill="currentColor" viewBox="0 0 24 24">
-<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-</svg>
-<div class="h-px w-10" style="background: linear-gradient(90deg, rgba(251,191,36,0.2), transparent);"></div>
-</div>
-<p class="text-white/10 text-[10px] tracking-widest">DIGITAL NFC CARD • YOUSSEF EL AMYN</p>
-</div>
-</div>
-</div>
-</div>
+    <script>
+        // Hide loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('pageLoader').classList.add('hidden');
+            }, 1800);
+        });
 
-<!-- ===== FOOTER ===== -->
-<footer class="footer-glass w-full py-6 px-4 relative z-10 mt-4">
-<div class="max-w-sm mx-auto">
-<div class="flex justify-center gap-6 mb-4">
-<button onclick="openModal('about')" class="footer-link text-xs font-medium">من نحن</button>
-<button onclick="openModal('terms')" class="footer-link text-xs font-medium">شروط الاستخدام</button>
-<button onclick="openModal('contact')" class="footer-link text-xs font-medium">اتصل بنا</button>
-</div>
-<div class="gold-line w-full mb-4"></div>
-<div class="text-center">
-<p class="text-white/20 text-[10px] tracking-wider">© 2026 YOUSSEF EL AMYN. جميع الحقوق محفوظة.</p>
-<p class="text-white/10 text-[9px] mt-1 tracking-wider">Designed with excellence for mobile excellence</p>
-</div>
-</div>
-</footer>
-
-<!-- ===== GALLERY OVERLAY ===== -->
-<div id="galleryOverlay" class="gallery-overlay">
-<div class="sticky top-0 z-10 bg-black/80 backdrop-blur-xl border-b border-white/5 px-4 py-4 flex items-center justify-between">
-<h2 class="text-white font-bold text-lg">معرض الصور</h2>
-<button onclick="closeGallery()" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-red-500/20 hover:border-red-500/30 transition-all">
-<svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-</svg>
-</button>
-</div>
-<div class="gallery-grid max-w-6xl mx-auto py-6">
-<!-- 10 Gallery Items -->
-<div class="gallery-item"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop" alt="Gallery 1"></div>
-<div class="gallery-item"><img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=400&h=400&fit=crop" alt="Gallery 2"></div>
-<div class="gallery-item"><img src="https://images.unsplash.com/photo-1616348436168-de43ad0db179?w=400&h=400&fit=crop" alt="Gallery 3"></div>
-<div class="gallery-item"><img src="https://images.unsplash.com/photo-1580910051074-3eb694886505?w=400&h=400&fit=crop" alt="Gallery 4"></div>
-<div class="gallery-item"><img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400&h=400&fit=crop" alt="Gallery 5"></div>
-<div class="gallery-item"><img src="https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=400&h=400&fit=crop" alt="Gallery 6"></div>
-<div class="gallery-item"><img src="https://images.unsplash.com/photo-1556656793-02715d8dd660?w=400&h=400&fit=crop" alt="Gallery 7"></div>
-<div class="gallery-item"><img src="https://images.unsplash.com/photo-1592434134753-a70baf7979d5?w=400&h=400&fit=crop" alt="Gallery 8"></div>
-<div class="gallery-item"><img src="https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=400&h=400&fit=crop" alt="Gallery 9"></div>
-<div class="gallery-item"><img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=400&h=400&fit=crop" alt="Gallery 10"></div>
-</div>
-</div>
-
-<!-- ===== MODALS COMPLETED ===== -->
-
-<!-- About Modal -->
-<div id="aboutModal" class="modal-overlay">
-<div class="modal-box">
-<div class="modal-glow"></div>
-<button onclick="closeModal('about')" class="modal-close">
-<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-</svg>
-</button>
-<h2 class="text-2xl font-black text-white mb-4 name-font">من نحن</h2>
-<div class="gold-line w-16 mb-4"></div>
-<p class="text-white/70 text-sm leading-relaxed mb-4">
-مرحباً بكم! نحن متخصصون في تقديم أحدث الحلول الرقمية الذكية للمقاولين والشركات والأفراد. نوفر بطاقات الأعمال الذكية المعتمدة على تقنية NFC، التي تمكنك من مشاركة بياناتك، وسائل التواصل الاجتماعي، ومعرض أعمالك بلمسة واحدة.
-</p>
-<p class="text-white/50 text-xs leading-relaxed">
-رؤيتنا هي تسهيل عملية التواصل المهني وإعطائك هوية رقمية احترافية وفاخرة تليق بأعمالك.
-</p>
-</div>
-</div>
-
-<!-- Terms Modal -->
-<div id="termsModal" class="modal-overlay">
-<div class="modal-box">
-<div class="modal-glow"></div>
-<button onclick="closeModal('terms')" class="modal-close">
-<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-</svg>
-</button>
-<h2 class="text-2xl font-black text-white mb-4 name-font">شروط الاستخدام</h2>
-<div class="gold-line w-16 mb-4"></div>
-<div class="space-y-3 text-white/70 text-sm leading-relaxed max-h-60 overflow-y-auto pr-1">
-<p>1. <strong>الاستخدام المسموح:</strong> تخصص هذه البطاقة الرقمية للتعريف الشخصي والمهني وبث روابط التواصل المعتمدة فقط.</p>
-<p>2. <strong>الملكية الفكرية:</strong> جميع التصاميم والهوية البصرية محمية بموجب حقوق الملكية لـ YOUSSEF EL AMYN.</p>
-<p>3. <strong>الخصوصية:</strong> نحن نحترم خصوصيتك ولا نتششارك بياناتك المعروضة في البطاقة مع أي أطراف خارجية غير مصرح بها.</p>
-</div>
-</div>
-</div>
-
-<!-- Contact Modal -->
-<div id="contactModal" class="modal-overlay">
-<div class="modal-box">
-<div class="modal-glow"></div>
-<button onclick="closeModal('contact')" class="modal-close">
-<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-</svg>
-</button>
-<h2 class="text-2xl font-black text-white mb-2 name-font">اتصل بنا</h2>
-<div class="gold-line w-16 mb-6"></div>
-<div class="space-y-4">
-<a href="tel:0638571166" class="flex items-center gap-4 p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all">
-<div class="w-10 h-10 rounded-lg bg-violet-500/20 flex items-center justify-center text-violet-400">
-<i class="fas fa-phone"></i>
-</div>
-<div class="text-right">
-<p class="text-xs text-white/50">الهاتف المباشر</p>
-<p class="text-sm font-bold text-white font-mono">06 38 57 11 66</p>
-</div>
-</a>
-<button onclick="openWhatsApp()" class="w-full flex items-center gap-4 p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-a
+        // Create gold dust particles
+        const dustContainer = document.getElementById('goldDust');
+        for (let i = 0; i < 40; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'dust-particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 12 + 's';
+            particle.style.animationDuration = (8 + Math.random() * 8) + 's';
+            particle.style.width = (1 + Math.random() * 3) + 'px';
+            particle.style.height = particle.style.width;
+            dustContainer.appendChild(particle);
+        }
+    </script>
+</body>
+</html>
