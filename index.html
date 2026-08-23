@@ -352,16 +352,14 @@
             aspect-ratio: 1;
             cursor: pointer;
             border: 1px solid var(--border-gold);
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
         }
 
         .gallery-item img {
             width: 100%; height: 100%;
             object-fit: cover;
-            transition: transform 0.6s ease;
+            display: block;
         }
-
-        .gallery-item:hover img { transform: scale(1.1); }
 
         .btn-open-gallery {
             width: 100%;
@@ -477,7 +475,7 @@
         }
         .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 8px #4ade80; }
 
-        /* ===== ADVANCED PHONE FRAME ANIMATION ===== */
+        /* ===== ANIMATED PHONE FRAME ===== */
         .phone-frame-container {
             display: flex;
             justify-content: center;
@@ -678,7 +676,7 @@
             letter-spacing: 3px;
         }
 
-        /* ===== MODAL ===== */
+        /* ===== GALLERY MODAL ===== */
         .gallery-modal {
             position: fixed;
             inset: 0;
@@ -713,6 +711,98 @@
             gap: 12px;
             max-width: 480px;
             margin: 0 auto;
+        }
+
+        /* ===== FULLSCREEN IMAGE LIGHTBOX (ملء الشاشة الفاخر) ===== */
+        .image-lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 5, 7, 0.96);
+            z-index: 9999999;
+            backdrop-filter: blur(15px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: 20px;
+        }
+
+        .image-lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 100%;
+            max-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 12px;
+            border: 1px solid var(--border-gold);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), 0 0 20px var(--shadow-gold);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -45px;
+            right: 0;
+            background: rgba(201, 168, 76, 0.2);
+            border: 1px solid var(--border-gold);
+            color: var(--gold-bright);
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            background: var(--gold-primary);
+            color: #000;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(201, 168, 76, 0.2);
+            border: 1px solid var(--border-gold);
+            color: var(--gold-bright);
+            width: 42px; height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--gold-primary);
+            color: #000;
+        }
+
+        .lightbox-prev { right: -15px; }
+        .lightbox-next { left: -15px; }
+
+        @media (max-width: 500px) {
+            .lightbox-prev { right: 5px; }
+            .lightbox-next { left: 5px; }
         }
     </style>
 </head>
@@ -789,8 +879,8 @@
                 <div class="section-line"></div>
             </div>
             <div class="gallery-grid">
-                <div class="gallery-item"><img src="Azz1.png" alt="Product 1"></div>
-                <div class="gallery-item"><img src="Azz2.png" alt="Product 2"></div>
+                <div class="gallery-item"><img src="Azz1.png" alt="Product 1" class="viewable-img"></div>
+                <div class="gallery-item"><img src="Azz2.png" alt="Product 2" class="viewable-img"></div>
             </div>
             <button class="btn-open-gallery" id="openGalleryBtn">
                 <i class="fas fa-photo-video"></i> معرض الصور الكامل
@@ -896,22 +986,32 @@
         </div>
         <div class="modal-body">
             <div class="full-gallery-grid">
-                <div class="gallery-item"><img src="Azz1.png" alt="Azz1"></div>
-                <div class="gallery-item"><img src="Azz2.png" alt="Azz2"></div>
-                <div class="gallery-item"><img src="Azz3.png" alt="Azz3"></div>
-                <div class="gallery-item"><img src="Azz4.png" alt="Azz4"></div>
-                <div class="gallery-item"><img src="Azz5.png" alt="Azz5"></div>
-                <div class="gallery-item"><img src="Azz6.png" alt="Azz6"></div>
-                <div class="gallery-item"><img src="Azz7.png" alt="Azz7"></div>
-                <div class="gallery-item"><img src="Azz8.png" alt="Azz8"></div>
+                <div class="gallery-item"><img src="Azz1.png" alt="Azz1" class="viewable-img"></div>
+                <div class="gallery-item"><img src="Azz2.png" alt="Azz2" class="viewable-img"></div>
+                <div class="gallery-item"><img src="Azz3.png" alt="Azz3" class="viewable-img"></div>
+                <div class="gallery-item"><img src="Azz4.png" alt="Azz4" class="viewable-img"></div>
+                <div class="gallery-item"><img src="Azz5.png" alt="Azz5" class="viewable-img"></div>
+                <div class="gallery-item"><img src="Azz6.png" alt="Azz6" class="viewable-img"></div>
+                <div class="gallery-item"><img src="Azz7.png" alt="Azz7" class="viewable-img"></div>
+                <div class="gallery-item"><img src="Azz8.png" alt="Azz8" class="viewable-img"></div>
             </div>
+        </div>
+    </div>
+
+    <!-- FULLSCREEN LIGHTBOX MODAL (نافذة ملء الشاشة للصور) -->
+    <div class="image-lightbox" id="imageLightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="closeLightboxBtn"><i class="fas fa-times"></i></button>
+            <button class="lightbox-nav lightbox-prev" id="prevImgBtn"><i class="fas fa-chevron-right"></i></button>
+            <img src="" alt="Full Screen View" class="lightbox-img" id="lightboxImg">
+            <button class="lightbox-nav lightbox-next" id="nextImgBtn"><i class="fas fa-chevron-left"></i></button>
         </div>
     </div>
 
     <script>
         const loader = document.getElementById('pageLoader');
         const startTime = Date.now();
-        const MIN_DISPLAY_TIME = 3000; // الإبقاء على الشاشة السوداء والشريط 3 ثوانٍ على الأقل لتظهر الحركة بجمالية وتحمل كل المكونات
+        const MIN_DISPLAY_TIME = 3000;
 
         function hideLoader() {
             const currentTime = Date.now();
@@ -925,7 +1025,6 @@
             }, remainingTime);
         }
 
-        // إخفاء الـ Loader فقط بعد اكتمال تحميل كل صور وملفات الموقع
         window.addEventListener('load', hideLoader);
 
         // Dust Effect
@@ -948,6 +1047,49 @@
 
         openGalleryBtn.addEventListener('click', () => galleryModal.classList.add('active'));
         closeGalleryBtn.addEventListener('click', () => galleryModal.classList.remove('active'));
+
+        // Fullscreen Lightbox Logic (عرض الصور ملء الشاشة)
+        const viewableImages = document.querySelectorAll('.viewable-img');
+        const imageLightbox = document.getElementById('imageLightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const closeLightboxBtn = document.getElementById('closeLightboxBtn');
+        const prevImgBtn = document.getElementById('prevImgBtn');
+        const nextImgBtn = document.getElementById('nextImgBtn');
+
+        let currentImgIndex = 0;
+        const allImgSources = Array.from(viewableImages).map(img => img.src);
+
+        function showLightbox(index) {
+            currentImgIndex = index;
+            lightboxImg.src = allImgSources[currentImgIndex];
+            imageLightbox.classList.add('active');
+        }
+
+        viewableImages.forEach((img, index) => {
+            img.addEventListener('click', () => showLightbox(index));
+        });
+
+        closeLightboxBtn.addEventListener('click', () => {
+            imageLightbox.classList.remove('active');
+        });
+
+        imageLightbox.addEventListener('click', (e) => {
+            if (e.target === imageLightbox) {
+                imageLightbox.classList.remove('active');
+            }
+        });
+
+        prevImgBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentImgIndex = (currentImgIndex - 1 + allImgSources.length) % allImgSources.length;
+            lightboxImg.src = allImgSources[currentImgIndex];
+        });
+
+        nextImgBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentImgIndex = (currentImgIndex + 1) % allImgSources.length;
+            lightboxImg.src = allImgSources[currentImgIndex];
+        });
     </script>
 </body>
 </html>
